@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, render_template
 import pandas as pd
 import json
 
@@ -14,10 +14,7 @@ df_movies = pd.read_csv('data/movies_clean.csv')
 
 @app.route('/')
 def index():
-    """Api description  here"""
-    author = "Flavio Bovio"
-    return (f"Author: {author}")
-
+    return render_template('index.html')    
 
 
 @app.route('/peliculas_idioma/<idioma>', methods=['GET'])
@@ -100,7 +97,7 @@ def productoras_exitosas(productora:str):
 def get_director(director:str):
     director = director.title()
     pelis = df_movies[df_movies.director==director]
-    retorno = pelis['return'].sum()
+    retorno = round(pelis['return'].sum(), 2)
     detalle = [{'movie':v, 'date':w, 'return':x, 'budget': y, 'revenue':z} \
             for v, w, x, y, z in zip(pelis['title'], pelis['release_date'],\
                                     pelis['return'], pelis['budget'], pelis['revenue'])]
