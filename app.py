@@ -20,15 +20,6 @@ def index():
 
 
 
-
-
-
-
-
-
-
-
-
 @app.route('/peliculas_idioma/<idioma>', methods=['GET'])
 def peliculas_idioma(idioma:str):
 
@@ -109,12 +100,12 @@ def productoras_exitosas(productora:str):
 def get_director(director:str):
     director = director.title()
     pelis = df_movies[df_movies.director==director]
-    retorno = pelis['return'].mean()
+    retorno = pelis['return'].sum()
     detalle = [{'movie':v, 'date':w, 'return':x, 'budget': y, 'revenue':z} \
             for v, w, x, y, z in zip(pelis['title'], pelis['release_date'],\
                                     pelis['return'], pelis['budget'], pelis['revenue'])]
 
-    respuesta = {'director': director, 'return':retorno, 'detail':detalle}
+    respuesta = {'director': director, 'total_return':retorno, 'detail':detalle}
 
     return json.dumps(respuesta)
 
