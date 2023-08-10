@@ -1,0 +1,10 @@
+# DOCKER
+
+#Build Image
+docker build -t movies .
+
+#Run local
+docker run -p 8080:8080 -e PORT=8080 movies
+
+#Local container bash console
+docker exec -it <container> bash
