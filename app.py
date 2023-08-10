@@ -1,15 +1,15 @@
 import os
-
 from flask import Flask, render_template
 import pandas as pd
 import json
+import ast
 
 app = Flask(__name__)
 
 
 
 
-df_movies = pd.read_csv('data/movies_clean.csv')
+df_movies = pd.read_parquet('data/movies_acotado.pq')
 
 
 @app.route('/')
@@ -75,17 +75,16 @@ def peliculas_pais(pais:str):
 
 
 
-
-
-
-
-
 @app.route('/productoras_exitosas/<productora>', methods=['GET'])
 def productoras_exitosas(productora:str):
-    mask = df_movies.production_companies.str.contains("'"+productora+"'", case=False)
+    mask = df_movies.production_companies.str.contains(productora, case=False)
     producciones = df_movies[mask]
-    total_revenue = round(producciones.revenue.sum())
-    cantidad = len(producciones)
+    if len(productora)>0:
+        total_revenue = round(producciones.revenue.sum())
+        cantidad = len(producciones)
+    else:
+        total_revenue = 0 
+        cantidad = 0
 
     respuesta = {'company': productora, 'total_revenue':total_revenue, 'total_movies':cantidad}
 
@@ -109,27 +108,21 @@ def get_director(director:str):
 
 
 
+@app.route('/recomendacion/<pelicula>', methods=['GET'])
+def recomendaciones(pelicula:str):
+    pelicula = pelicula.title()
+    peli = df_movies[df_movies.title == pelicula]
+    if len(peli)==1:
+        recomendations = list(peli.iloc[0].recomendations)
+    else:
+        pelicula = f'Error: {pelicula} does not exists' 
+        recomendations = {}
 
+    respuesta = {'Movie':pelicula, 'Recomendations' : recomendations}
 
-
+    return json.dumps(respuesta)
 
 
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
-# [END run_helloworld_service]
-# [END cloudrun_helloworld_service]
-
-
-
-
-
-
-
-
-# def **productoras_exitosas( *`Productora`: str* )**:
-#   Se ingresa la productora, entregandote el revunue total y la cantidad de peliculas que realizo. 
-
-# &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ejemplo de retorno: *La productora `X` ha tenido un revenue de `x`*
-
-# def **get_director( *`nombre_director`* )**:
