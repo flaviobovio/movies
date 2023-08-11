@@ -1,10 +1,10 @@
 steps:
-  # Instalar las dependencias definidas en requirements.txt
+  # Install dependencies defined in requirements.txt
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/movies-2023-07-31/my-python-app', '.']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/movies-2023-07-31/my-python-app']
-  # Configurar el despliegue en Cloud Run
+  # Cloud Run deploy configuration
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'deploy', 'my-python-app', '--image', 'gcr.io/movies-2023-07-31/my-python-app', '--platform', 'managed', '--region', 'us-central1']
 

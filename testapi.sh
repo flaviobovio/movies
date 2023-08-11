@@ -15,7 +15,7 @@ echo "response"
 curl $rq
 
 echo "\n\n=== Test franquicia ==="
-export rq=https://my-python-app-ei4zqecxya-uc.a.run.app/franquicia/toy%20story%20collection
+export rq=https://my-python-app-ei4zqecxya-uc.a.run.app/franquicia/cars%20collection
 echo "request"
 echo $rq
 echo "response"
@@ -34,7 +34,7 @@ curl $rq
 
 
 echo "\n\n=== Test productoras_exitosas ==="
-export rq=https://my-python-app-ei4zqecxya-uc.a.run.app/productoras_exitosas/TriStar
+export rq=https://my-python-app-ei4zqecxya-uc.a.run.app/productoras_exitosas/paramount%20pictures
 echo "request"
 echo $rq
 echo "response"
@@ -51,17 +51,8 @@ curl $rq
 
 
 
-
-
-
-
-
-
-
-
-
 echo "\n\n=== Test recomendations ==="
-export rq="https://my-python-app-ei4zqecxya-uc.a.run.app/recomendacion/cars"
+export rq=https://my-python-app-ei4zqecxya-uc.a.run.app/recomendacion/toy%20story
 echo "request"
 echo $rq
 echo "response"
