@@ -3,3 +3,4 @@ pandas==2.0.3
 pyarrow==12.0.1
 fastparquet==2023.7.0
 gunicorn==20.1.0
+Werkzeug==2.2.2
