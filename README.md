@@ -56,8 +56,8 @@
 
 + ** Note: app.route = IP or deploy link of the API
 
-### 7) Adicional INFO ###
+### 7) Additional INFO ###
 + Project Start: 2023-07-24 - End: 2023-08-11
 + Author: Flavio Bovio
 + E-Mail: flavioboviovt@gmail.com
-+ LinkedIn: https://www.linkedin.com/in/flavio-bovio-8900b65a/
++ LinkedIn: https://www.linkedin.com/in/flavio-bovio/
